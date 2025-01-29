@@ -11,7 +11,7 @@ const Layout = () => {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
         <Header />
-        <StyledContainer>
+        <StyledContainer maxWidth="l">
         <Outlet/>
         </StyledContainer>
         </ThemeProvider>

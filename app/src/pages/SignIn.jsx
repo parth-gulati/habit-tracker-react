@@ -5,31 +5,41 @@ import facepaint from 'facepaint'
 import { Link } from "react-router";
 const breakpoints = [480, 768, 1024, 1440];
 const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
-
+import Typewriter from 'typewriter-effect'
 
 const SignIn = () => {
     return (
-        <StyledContainer>
+        <StyledContainer maxWidth="sm">
             <StyledPaper elevation={3}>
-        <AnimatedDiv>
-            <StyledHeader style={{color: 'primary'}} variant="h5">Sign In</StyledHeader>
-        </AnimatedDiv>
-        <Box style={{flex: 0.5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-            <StyledDescription variant="body2">Log in to log goals</StyledDescription>
-            </Box>
-            <Box style={{flex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%'}}>
-            <InputBox>
-            <TextField type="email" fullWidth color="secondary" id="outlined-basic" label="Email" variant="outlined" style={{marginBottom: '20px;'}} />
-            </InputBox>
-            <InputBox>
-<TextField type="password" color="secondary" fullWidth id="filled-basic" label="Password" variant="outlined" />
-</InputBox>
-<Button color="secondary" style={{marginTop: '10px'}}>Login</Button>
-<Box style={{width: '100%'}}>
-<Typography style={{textAlign: 'left', fontSize: '0.8rem'}} color="secondary" variant="body2" component={Link} to="/signup">Already a user? click here</Typography>
-</Box>
-        </Box>
-        </StyledPaper>
+                <AnimatedDiv>
+                    <StyledHeader style={{ color: 'primary' }} variant="h5">Sign In</StyledHeader>
+                </AnimatedDiv>
+                <Box style={{ flex: 0.5, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+                    <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                        <StyledDescription variant="body2">Sign in to start logging&nbsp;</StyledDescription>
+
+                        <StyledTypeWriter
+                            options={{
+                                strings: ['success.', 'wins.', 'goals.', 'life.'],
+                                autoStart: true,
+                                loop: true
+                            }}
+                        />
+                    </Box>
+                </Box>
+                <Box style={{ flex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                    <InputBox>
+                        <TextField type="email" fullWidth color="secondary" id="outlined-basic" label="Email" variant="outlined" />
+                    </InputBox>
+                    <InputBox>
+                        <TextField type="password" color="secondary" fullWidth id="filled-basic" label="Password" variant="outlined" />
+                    </InputBox>
+                    <Button color="secondary" style={{ marginTop: '20px', marginBottom: '20px' }}>Sign In</Button>
+                    <Box style={{ width: '100%' }}>
+                        <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color="secondary" variant="body2" component={Link} to="/signup">Noobie? Sign up. :)</Typography>
+                    </Box>
+                </Box>
+            </StyledPaper>
         </StyledContainer>
     );
 
@@ -38,22 +48,25 @@ const SignIn = () => {
 
 const InputBox = styled(Box)`
     padding: 5px;  
-    width: 80%;
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
 `
 
 const StyledDescription = styled(Typography)`
-    font-family: 'Quicksand', serif;
-    color: 'disabled';
+    font-size: 1rem;
 `
 
 const StyledPaper = styled(Paper)`
     padding: 1rem;
     margin: 1rem;
     ${mq({
-      height: ['300px', '350px', '400px', '450px'], // Varying heights for breakpoints
-      margin: ['0.5rem', '1rem', '1.5rem', '2rem'],
-      minWidth: ['300px', '320px', '400px', '500px'],
-    })};
+    minHeight: ['450x', '425px', '400px', '450px'], // Varying heights for breakpoints
+    margin: ['0.5rem', '1rem', '1.5rem', '2rem'],
+    minWidth: ['90vw', '330px', '400px', '500px']
+})};
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -97,7 +110,7 @@ const AnimatedDiv = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
-  height: 90px;
+  min-height: 90px;
   flex: 1;
   aspect-ratio: 1.8;
     --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
@@ -105,5 +118,8 @@ const AnimatedDiv = styled.div`
     background:rgb(211, 211, 211, 0.2);
 `;
 
+const StyledTypeWriter = styled(Typewriter)`
+    font-size: 1rem;
+`
 
 export default SignIn;

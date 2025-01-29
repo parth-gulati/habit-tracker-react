@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import Layout from './common/Layout'
 import SignIn from './pages/SignIn'
 import PrivateWrapper from './common/PrivateRoute';
+import SignUp from './pages/SignUp'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             )
           } />
           <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
         </Route>
       </Routes>
     </BrowserRouter>
