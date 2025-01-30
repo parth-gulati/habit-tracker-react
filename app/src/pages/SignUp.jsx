@@ -6,6 +6,7 @@ import { Link } from "react-router";
 const breakpoints = [480, 768, 1024, 1440];
 const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
 import Typewriter from 'typewriter-effect'
+import SignUpForm from "../components/SignUpForm";
 
 const SignUp = () => {
     return (
@@ -32,20 +33,7 @@ const SignUp = () => {
                 </Box>
                 <Box style={{ flex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
 
-                    <InputBox>
-                        <TextField color="secondary" id="outlined-basic" label="First Name" variant="outlined" style={{ marginRight: '10px' }} />
-                        <TextField color="secondary" id="outlined-basic" label="Last Name" variant="outlined" />
-                    </InputBox>
-                    <InputBox>
-                        <TextField type="email" fullWidth color="secondary" id="outlined-basic" label="Email" variant="outlined" />
-                    </InputBox>
-                    <InputBox>
-                        <TextField type="password" color="secondary" fullWidth id="filled-basic" label="Password" variant="outlined" />
-                    </InputBox>
-                    <InputBox>
-                        <TextField type="password" color="secondary" fullWidth id="filled-basic" label="Confirm Password" variant="outlined" />
-                    </InputBox>
-                    <Button color="secondary" style={{ marginTop: '20px', marginBottom: '20px' }}>Sign Up</Button>
+                    <SignUpForm/>
                     <Box style={{ width: '100%' }}>
                         <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color="secondary" variant="body2" component={Link} to="/signin">Already a user? click here</Typography>
                     </Box>

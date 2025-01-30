@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
 import pymongo
 import urllib.parse
 from dotenv import load_dotenv
@@ -23,6 +24,8 @@ db = client.habittracker
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Routes
 from user import routes

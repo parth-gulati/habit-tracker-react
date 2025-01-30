@@ -1,11 +1,12 @@
 import { Typography, Container, Paper, Box, TextField, Button } from "@mui/material";
-import { css, keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import facepaint from 'facepaint'
 import { Link } from "react-router";
 const breakpoints = [480, 768, 1024, 1440];
 const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
 import Typewriter from 'typewriter-effect'
+import SignInForm from "../components/SignInForm";
 
 const SignIn = () => {
     return (
@@ -29,13 +30,7 @@ const SignIn = () => {
                     </Box>
                 </Box>
                 <Box style={{ flex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-                    <InputBox>
-                        <TextField type="email" fullWidth color="secondary" id="outlined-basic" label="Email" variant="outlined" />
-                    </InputBox>
-                    <InputBox>
-                        <TextField type="password" color="secondary" fullWidth id="filled-basic" label="Password" variant="outlined" />
-                    </InputBox>
-                    <Button color="secondary" style={{ marginTop: '20px', marginBottom: '20px' }}>Sign In</Button>
+                    <SignInForm/>
                     <Box style={{ width: '100%' }}>
                         <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color="secondary" variant="body2" component={Link} to="/signup">Noobie? Sign up. :)</Typography>
                     </Box>
@@ -46,15 +41,6 @@ const SignIn = () => {
 
 
 };
-
-const InputBox = styled(Box)`
-    padding: 5px;  
-    width: 85%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-
-`
 
 const StyledDescription = styled(Typography)`
     font-size: 1rem;

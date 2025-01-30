@@ -6,12 +6,14 @@ import Layout from './common/Layout'
 import SignIn from './pages/SignIn'
 import PrivateWrapper from './common/PrivateRoute';
 import SignUp from './pages/SignUp'
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <BrowserRouter>
+    <ToastContainer/>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={

@@ -19,10 +19,10 @@ class User:
     def signup(self):
         user = {
             "_id": uuid.uuid4().hex,
-            "first_name": request.form.get('first_name'),
-            "last_name": request.form.get('last_name'),
-            "email": request.form.get("email"),
-            "password": request.form.get("password"),
+            "first_name": request.json.get('first_name'),
+            "last_name": request.json.get('last_name'),
+            "email": request.json.get("email"),
+            "password": request.json.get("password"),
             "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
 
@@ -38,11 +38,13 @@ class User:
     
     def login(self):
         user = db.users.find_one({
-            "email": request.form.get("email"),
+            "email": request.json.get("email"),
 
         })
 
-        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
+        print(request.json.get("email"))
+
+        if user and pbkdf2_sha256.verify(request.json.get('password'), user['password']):
             return self.start_session(user)
         
-        return jsonify({"error": "Password or email is invalid"}), 200
+        return jsonify({"error": "Password or email is invalid"}), 401
