@@ -20,6 +20,7 @@ const SignIn = () => {
 
                         <StyledTypeWriter
                             options={{
+                                cursor: '&#128173;',
                                 strings: ['success.', 'wins.', 'goals.', 'life.'],
                                 autoStart: true,
                                 loop: true
