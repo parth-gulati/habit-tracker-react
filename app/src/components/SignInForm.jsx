@@ -16,7 +16,7 @@ const LoginSchema = Yup.object().shape({
         .required("Password is required"),
 });
 
-const SignInForm = () => {
+const SignInForm = ({setToken}) => {
 
     const [loading, setLoading] = useState(false);
 
@@ -31,14 +31,16 @@ const SignInForm = () => {
     const onSubmit = async (data) => {
         setLoading(true)
         const res = await login(data)
+        console.log(res)
         setLoading(false)
 
         if(res.status==200){
             toast.success('Successfully logged in!')
+            setToken(res.data.data.access_token)
         }
         else{
             console.log(res)
-            toast.error(res.data.error)
+            toast.error(res.data.message)
         }
         
 

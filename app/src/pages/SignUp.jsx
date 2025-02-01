@@ -7,8 +7,19 @@ const breakpoints = [480, 768, 1024, 1440];
 const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
 import Typewriter from 'typewriter-effect'
 import SignUpForm from "../components/SignUpForm";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
-const SignUp = () => {
+const SignUp = ({ token, setToken }) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token])
+
     return (
         <StyledContainer maxWidth="sm">
             <StyledPaper elevation={3}>
@@ -33,7 +44,7 @@ const SignUp = () => {
                 </Box>
                 <Box style={{ flex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
 
-                    <SignUpForm/>
+                    <SignUpForm setToken={setToken}/>
                     <Box style={{ width: '100%' }}>
                         <Typography style={{ textAlign: 'left', fontSize: '0.8rem' }} color="secondary" variant="body2" component={Link} to="/signin">Already a user? click here</Typography>
                     </Box>

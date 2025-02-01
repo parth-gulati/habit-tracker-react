@@ -16,13 +16,26 @@ export const login = async (data) => {
     }
 };
 
+export const logout = async () => {
+    try {
+        const res = await axios.post(
+            `${base_url}/user/signout`,
+        )
+        return {data: res.data, status: res.status} ;
+    }
+    catch (error) {
+        console.log(error.response)
+        return {data: error.response.data, status: error.response.status}
+    }
+}
+
 export const signup = async (data) => {
     try {
         const res = await axios.post(
             `${base_url}/user/signup`,
             {
                 first_name: data.firstName,
-                last_name: data.last_name,
+                last_name: data.lastName,
                 email: data.email,
                 password: data.password
             },

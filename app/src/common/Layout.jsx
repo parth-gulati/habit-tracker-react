@@ -6,11 +6,11 @@ import styled from '@emotion/styled'
 import { Outlet } from "react-router";
 import CssBaseline from '@mui/material/CssBaseline';
 
-const Layout = () => {
+const Layout = ({token, removeToken}) => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-        <Header />
+        <Header token={token} removeToken={removeToken} />
         <StyledContainer maxWidth="l">
         <Outlet/>
         </StyledContainer>

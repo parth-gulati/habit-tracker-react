@@ -17,7 +17,7 @@ const SignUpSchema = Yup.object().shape({
       .required("Confirm Password is required"),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({setToken}) => {
     const [loading, setLoading] = useState(false);
   
     const { handleSubmit, control } = useForm({
@@ -38,8 +38,10 @@ const SignUpForm = () => {
       const res = await signup(formData);
       setLoading(false);
   
-      if (res.status === 201) {
+      if (res.status === 200 || res.data.status == "success") {
         toast.success("Account created successfully!");
+        setToken(res.data.data.access_token)
+
       } else {
         console.log(res);
         toast.error(res.data.error || "Sign-up failed!");
