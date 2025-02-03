@@ -14,7 +14,7 @@ const SignIn = ({ token, setToken }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        if (!!token) {
             navigate('/');
         }
     }, [token])

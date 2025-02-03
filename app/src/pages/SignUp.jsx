@@ -15,7 +15,7 @@ const SignUp = ({ token, setToken }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        if (!!token) {
             navigate('/');
         }
     }, [token])

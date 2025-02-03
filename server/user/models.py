@@ -49,3 +49,20 @@ class User:
             return self.start_session(user)
         
         return jsonify({"status": "error", "message": "Invalid email or password"}), 401
+    
+    def get_user(self):
+        try:
+            current_user = get_jwt_identity()
+            if not current_user:
+                return jsonify({"status": "error", "message": "Invalid JWT token"}), 401
+            
+            user = db.users.find_one({
+                "email": current_user
+            })
+
+            if user:
+                del user['password']
+                return jsonify({"status": "success", "data": {"user": user}}), 200
+            return jsonify({"status": "error", "data": "Some error has occured"}), 401
+        except:
+            return jsonify({"status": "error", "data": "Some error has occured"}), 401

@@ -9,10 +9,10 @@ export const login = async (data) => {
             data,
             { headers: { 'Content-Type': 'application/json' } }
         );
-        return {data: res.data, status: res.status} ;
+        return { data: res.data, status: res.status };
     } catch (error) {
         console.log(error.response)
-        return {data: error.response.data, status: error.response.status}
+        return { data: error.response.data, status: error.response.status }
     }
 };
 
@@ -21,11 +21,11 @@ export const logout = async () => {
         const res = await axios.post(
             `${base_url}/user/signout`,
         )
-        return {data: res.data, status: res.status} ;
+        return { data: res.data, status: res.status };
     }
     catch (error) {
         console.log(error.response)
-        return {data: error.response.data, status: error.response.status}
+        return { data: error.response.data, status: error.response.status }
     }
 }
 
@@ -41,9 +41,25 @@ export const signup = async (data) => {
             },
             { headers: { 'Content-Type': 'application/json' } }
         );
-        return {data: res.data, status: res.status} ;
+        return { data: res.data, status: res.status };
     } catch (error) {
         console.log(error.response)
-        return {data: error.response.data, status: error.response.status}
+        return { data: error.response.data, status: error.response.status }
     }
 };
+
+export const getuser = async (token) => {
+    try {
+        const res = await axios.get(
+            `${base_url}/user/getuser`,
+            { headers: { 'Authorization': `Bearer ${token}` } }
+        )
+
+        return { data: res.data, status: res.status };
+    } catch (error) {
+        console.log(error.response)
+        return { data: error.response.data, status: error.response.status }
+    }
+
+
+}

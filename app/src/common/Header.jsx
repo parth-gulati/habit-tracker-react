@@ -16,6 +16,8 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from 'react-router';
 import { logout } from '../api/authenticationApi';
+import { useUser } from '../context/UserContext';
+import { useEffect } from 'react';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard'];
@@ -23,6 +25,8 @@ const settings = ['Profile', 'Account', 'Dashboard'];
 function Header({ token, removeToken }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const {logoutUser, user} = useUser();
+
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -46,6 +50,7 @@ function Header({ token, removeToken }) {
       toast.success(res.data.message)
     }
     removeToken();
+    logoutUser();
     setAnchorElUser(null);
   };
 
@@ -53,7 +58,6 @@ function Header({ token, removeToken }) {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -66,14 +70,12 @@ function Header({ token, removeToken }) {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+        
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            HTrack
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -149,7 +151,7 @@ function Header({ token, removeToken }) {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user?.first_name ? user?.first_name : "User"} src="/static/images/avatar/2.jpg" />
                   </IconButton>
                 </Tooltip>
                 <Menu

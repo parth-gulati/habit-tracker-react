@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { signup } from "../api/authenticationApi";
+import { getuser, signup } from "../api/authenticationApi";
 
 const SignUpSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
@@ -41,10 +41,10 @@ const SignUpForm = ({setToken}) => {
       if (res.status === 200 || res.data.status == "success") {
         toast.success("Account created successfully!");
         setToken(res.data.data.access_token)
+        const user = await getuser(res.data.data.access_token);
 
       } else {
-        console.log(res);
-        toast.error(res.data.error || "Sign-up failed!");
+        toast.error(res.data.message || "Sign-up failed!");
       }
     };
   

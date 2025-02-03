@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useForm, Controller } from "react-hook-form"
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { login } from "../api/authenticationApi";
+import { getuser, login } from "../api/authenticationApi";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
@@ -37,6 +37,8 @@ const SignInForm = ({setToken}) => {
         if(res.status==200){
             toast.success('Successfully logged in!')
             setToken(res.data.data.access_token)
+            const user = await getuser();
+            console.log(user)
         }
         else{
             console.log(res)
