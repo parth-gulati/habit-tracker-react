@@ -2,12 +2,13 @@ import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Container, Typography, Box } from '@mui/material';
 import { ResponsiveCalendar } from '@nivo/calendar'
-import CalendarGraph from '../common/CalendarGraph';
+import CalendarGraph from '../components/CalendarGraph';
 import facepaint from 'facepaint';
 import { breakpoints } from '../helpers/breakpoints';
 import CenteredTabs from '../common/Tabs';
 import { useState } from 'react';
-import MyResponsiveTimeRange from '../common/TimeRange';
+import MyResponsiveTimeRange from '../components/TimeRange';
+import WeekGraph from '../components/WeekGraph';
 
 const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
 
@@ -25,6 +26,10 @@ const Dashboard = () => {
                 {
                     tab=='Month' &&
                     <MyResponsiveTimeRange/>
+                }
+                {
+                    tab=='Day' &&
+                    <WeekGraph/>
                 }
             </StyledDiv>
         </StyledContainer>
