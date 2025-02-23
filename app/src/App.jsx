@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import useToken from './context/useToken'
 import NewHabit from './pages/NewHabit';
 import { UserProvider } from './context/UserContext';
+import ViewMetrics from './pages/ViewMetrics';
 
 function App() {
   const { token, removeToken, setToken } = useToken();
@@ -22,6 +23,9 @@ function App() {
             </Route>
             <Route element={<PrivateWrapper auth={{ token: token }} />}>
               <Route path="/new-habit" element={<NewHabit />} />
+            </Route>
+            <Route element={<PrivateWrapper auth={{ token: token }} />}>
+              <Route path="/view-metrics" element={<ViewMetrics />} />
             </Route>
             <Route path='/signin' element={<SignIn token={token} setToken={setToken} />} />
             <Route path='/signup' element={<SignUp token={token} setToken={setToken} />} />

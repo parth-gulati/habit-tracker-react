@@ -37,8 +37,6 @@ const SignInForm = ({setToken}) => {
         if(res.status==200){
             toast.success('Successfully logged in!')
             setToken(res.data.data.access_token)
-            const user = await getuser();
-            console.log(user)
         }
         else{
             console.log(res)

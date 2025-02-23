@@ -1,5 +1,5 @@
 run-server:
-	cd server && npm run start
+	cd server && ./run
 run-app:
 	cd app && npm run dev
 # run:

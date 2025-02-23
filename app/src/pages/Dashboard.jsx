@@ -1,51 +1,20 @@
-import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Container, Typography, Box } from '@mui/material';
-import { ResponsiveCalendar } from '@nivo/calendar'
-import CalendarGraph from '../components/CalendarGraph';
-import facepaint from 'facepaint';
-import { breakpoints } from '../helpers/breakpoints';
-import CenteredTabs from '../common/Tabs';
+import { Container, Typography, Box, Button} from '@mui/material';
 import { useState } from 'react';
-import MyResponsiveTimeRange from '../components/TimeRange';
-import WeekGraph from '../components/WeekGraph';
-
-const mq = facepaint(breakpoints.map(bp => `@media (min-width: ${bp}px)`));
+import { useNavigate } from 'react-router';
 
 const Dashboard = () => {
-    const [tab, setTab] = useState("Day");
+    const navigate = useNavigate();
     return (
         <StyledContainer>
             <Typography variant='h4'>Dashboard</Typography>
-            <CenteredTabs tab={tab} setTab={setTab} style={{ paddingTop: 10 }} />
-            <StyledDiv>
-                {
-                    tab=='Year' &&
-                    <CalendarGraph />
-                }
-                {
-                    tab=='Month' &&
-                    <MyResponsiveTimeRange/>
-                }
-                {
-                    tab=='Day' &&
-                    <WeekGraph/>
-                }
-            </StyledDiv>
+            <StyledContainer2>
+                <StyledButton variant='outlined' color='secondary' onClick={()=>{navigate('/new-habit')}}>Add New Habit</StyledButton>
+                <StyledButton variant='outlined' color='secondary' onClick={()=>{navigate('/view-metrics')}}>View Metrics</StyledButton>
+            </StyledContainer2>
         </StyledContainer>
     );
 }
-
-const StyledDiv = styled(Box)`
-    ${mq({
-    height: [300, 300, 300, 300],
-    minWidth: ['100%', '100%', '80%', '60%']
-})};
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
 
 const StyledContainer = styled(Container)`
     display: flex;
@@ -53,6 +22,18 @@ const StyledContainer = styled(Container)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+`
+
+const StyledButton = styled(Button)`
+    margin: 10px;
+`
+
+const StyledContainer2 = styled(Container)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 `
 
 export default Dashboard;

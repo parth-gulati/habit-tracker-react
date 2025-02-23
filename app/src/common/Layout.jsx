@@ -3,25 +3,33 @@ import Header from "./Header";
 import { ThemeProvider } from '@mui/material/styles'
 import { lightTheme, darkTheme } from "./Theme";
 import styled from '@emotion/styled'
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import CssBaseline from '@mui/material/CssBaseline';
 import { useEffect } from "react";
-import { getuser } from "../api/authenticationApi";
+import { getuser, logout } from "../api/authenticationApi";
 import { useUser } from "../context/UserContext";
 
 const Layout = ({ token, removeToken }) => {
 
-    const { loginUser } = useUser();
+    const { loginUser, logoutUser } = useUser();
+    const navigate = useNavigate();
+
     useEffect(() => {
         const getUser = async () => {
-            if (token) {
-                const user = await getuser(token);
-                console.log(user)
-                loginUser(user.data.data.user);
+            const user = await getuser(token);
+            console.log(user)
+            if (user.status == 401) {
+                await logout();
+                logoutUser();
+                removeToken();
+                navigate('/');
             }
-        }
+            loginUser(user.data.data.user);
 
-        getUser();
+        }
+        if (token) {
+            getUser();
+        }
     }, [token])
 
     return (

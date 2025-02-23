@@ -41,7 +41,6 @@ const SignUpForm = ({setToken}) => {
       if (res.status === 200 || res.data.status == "success") {
         toast.success("Account created successfully!");
         setToken(res.data.data.access_token)
-        const user = await getuser(res.data.data.access_token);
 
       } else {
         toast.error(res.data.message || "Sign-up failed!");
