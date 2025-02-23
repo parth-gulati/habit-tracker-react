@@ -53,6 +53,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Routes
 from user import routes
+from habits import routes
+from checkin import routes
 
 # tester
 @app.route('/profile')
